@@ -1,2 +1,19 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+    import ExampleContainer from "$lib/components/ExampleContainer.svelte";
+    import { visible } from "$lib/stores/visibleStore";
+    import { fetchNui } from "$lib/utils/fetchNui";
+    import { isEnvBrowser } from "$lib/utils/isEnvBrowser";
+
+    function handleKeyboardEvent(event: KeyboardEvent): void {
+        if (["Backspace", "Escape"].includes(event.code)) {
+            if (!isEnvBrowser()) {
+                fetchNui("hideFrame");
+            }
+            visible.set(false);
+        }
+    }
+</script>
+
+<ExampleContainer></ExampleContainer>
+
+<svelte:window on:keydown={handleKeyboardEvent} />
