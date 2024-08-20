@@ -1,0 +1,9 @@
+# Package Managers
+package.json
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# JSON configuration files
+.prettierrc.json
+tsconfig.json
