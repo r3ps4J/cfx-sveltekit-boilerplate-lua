@@ -1,7 +1,8 @@
-import { writable } from "svelte/store";
+import { createWritableMessageActionStore } from "./messageActionStore";
 
 function createVisible() {
-    return writable<boolean>(false);
+    // Listen to the "setVisible" message, but allow writing to the store as well.
+    return createWritableMessageActionStore<boolean>("setVisible");
 }
 
 export const visible = createVisible();

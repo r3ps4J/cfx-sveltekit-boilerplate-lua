@@ -82,7 +82,7 @@ _Notes:_
 
 - _You can subscribe to the same action as many times as you want._
 - _When you subscribe to an event that was received before, the current value of the store will be emitted after subscribing._
-- _If a message is received but the value hasn't changed, the listener will not be called._
+- _If a message is received but the value hasn't changed, the listener will not be called. This means you cannot use this if you update the state on the NUI side, like with setVisible. Take a look at `createWritableMessageActionStore` if you need this._
 
 **Usage**
 
@@ -93,6 +93,29 @@ createMessageActionStore<boolean>("setVisible").subscribe((value) => {
     visible = value;
 });
 ```
+
+**createWritableMessageActionStore**
+
+This function returns a store which can be subscribed to to receive updates for a certain action. Use this if you need write access to a store on the NUI side. If you do not, it's better to use the regular `createMessageActionStore`.
+
+**Usage**
+
+```ts
+let visible = createMessageActionStore<boolean>("setVisible")
+
+visible.subscribe((value) => {
+    if (value) {
+        console.log("Hello!");
+    } else {
+        console.log("Goodbye!");
+    }
+})
+
+visible.set(true); // Will print "Hello!"
+visible.set(false); // Will print "Goodbye!"
+```
+
+_Note: if you subscribe to the same event somewhere else in your application, it will also have the updated state regardless of whether you subscribed to a writeable or readable version of the store. You can also wrap this in a custom store for easier refactoring later on!_
 
 **fetchNui**
 

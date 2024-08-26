@@ -12,9 +12,13 @@ if (browser) {
     });
 }
 
-export function createMessageActionStore<T = any>(action: string): Readable<T> {
+export function createWritableMessageActionStore<T = any>(action: string): Writable<T> {
     if (!actionStores[action]) {
         actionStores[action] = writable<T>();
     }
-    return readonly(actionStores[action]);
+    return actionStores[action];
+}
+
+export function createMessageActionStore<T = any>(action: string): Readable<T> {
+    return readonly(createWritableMessageActionStore<T>(action));
 }
