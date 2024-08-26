@@ -78,7 +78,11 @@ Signatures are not included for these utilities as the type definitions are suff
 
 This function returns a store which can be subscribed to to receive updates for a certain action. This is the primary way of creating passive listeners.
 
-_Note: You can subscribe to the same action as many times as you want._
+_Notes:_
+
+- _You can subscribe to the same action as many times as you want._
+- _When you subscribe to an event that was received before, the current value of the store will be emitted after subscribing._
+- _If a message is received but the value hasn't changed, the listener will not be called._
 
 **Usage**
 
