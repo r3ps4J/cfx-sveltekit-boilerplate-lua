@@ -1,8 +1,6 @@
 <script lang="ts">
     import { visible } from "$lib/stores/visibleStore";
     import { dispatchDebugMessages } from "$lib/utils/dispatchDebugMessages";
-    import { fetchNui } from "$lib/utils/fetchNui";
-    import { isEnvBrowser } from "$lib/utils/isEnvBrowser";
 
     let { children } = $props();
 
@@ -16,9 +14,6 @@
 
     function handleKeyboardEvent(event: KeyboardEvent): void {
         if (["Backspace", "Escape"].includes(event.code)) {
-            if (!isEnvBrowser()) {
-                fetchNui("hideFrame");
-            }
             visible.set(false);
         }
     }

@@ -115,7 +115,7 @@ visible.set(true); // Will print "Hello!"
 visible.set(false); // Will print "Goodbye!"
 ```
 
-_Note: if you subscribe to the same event somewhere else in your application, it will also have the updated state regardless of whether you subscribed to a writeable or readable version of the store. You can also wrap this in a custom store for easier refactoring later on!_
+_Note: if you subscribe to the same event somewhere else in your application, it will also have the updated state regardless of whether you subscribed to a writeable or readable version of the store. You can also wrap this in a custom store for easier refactoring later on! And even include fetchNui in there to update the Lua side of the application as well!_
 
 **fetchNui**
 
