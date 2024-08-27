@@ -74,6 +74,26 @@ DebugPrint("Is Svelte better than React?", true, someOtherVar)
 
 Signatures are not included for these utilities as the type definitions are sufficient enough.
 
+**onMessageAction**
+
+This is a custom function that is designed to intercept and handle messages dispatched by the game scripts. This is the primary way of creating passive listeners.
+
+_Note: This only works inside components, as the handler gets removed once the component gets destroyed. If you need it outside of components (i.e. stores), take a look at `createMessageActionStore`._
+
+**Usage**
+
+```svelte
+<script lang="ts">
+    let count = $state<number>(0);
+
+    // This listens for the "setCount" message
+    onMessageAction<string>("setCount", (data) => {
+        // Do whatever logic you want here
+        count = data;
+    });
+</script>
+```
+
 **createMessageActionStore**
 
 This function returns a store which can be subscribed to to receive updates for a certain action. This is the primary way of creating passive listeners.
